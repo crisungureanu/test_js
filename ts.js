@@ -1,4 +1,4 @@
-fetch('https://app-abdemo1.marketo.com/?meue&meueDataOnlyMode&meueAdminTreeEnabled&meueVisualCampaign')
+fetch('https://app-/?meue&meueDataOnlyMode&meueAdminTreeEnabled&meueVisual')
   .then(response => response.text())
   .then(html => {
     const ssoIdRegex = /"ssoId"\s*:\s*"([^"]+)"/;
